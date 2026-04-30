@@ -108,3 +108,5 @@ db.sequelize.sync({ alter: true }).then(() => {
 }).catch(err => {
   console.error("❌ Gagal sinkronisasi database:", err);
 });
+
+module.exports = app;
