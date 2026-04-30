@@ -1,0 +1,74 @@
+<%# ========================================================================= %>
+<%# 1. JUDUL HALAMAN & INFORMASI %>
+<%# Bagian atas halaman yang berisi judul dan info pengurutan data. %>
+<%# ========================================================================= %>
+<h2 class="mb-4 text-center">Hasil Perhitungan SPK (Metode SAW)</h2>
+
+<div class="alert alert-info">
+    Data di bawah ini sudah diurutkan dari skor terbesar (Peringkat 1) hingga terkecil.
+</div>
+
+<%# ========================================================================= %>
+<%# 2. TABEL HASIL RANKING %>
+<%# Menampilkan hasil akhir perhitungan SAW beserta tombol aksi untuk memilih. %>
+<%# ========================================================================= %>
+<table class="table table-bordered table-hover mt-3">
+    <thead class="table-dark text-center">
+        <tr>
+            <th width="10%">Peringkat</th>
+            <th>Nama Alternatif</th>
+            <th>Skor Akhir (V)</th>
+            <th width="15%">Aksi</th> 
+        </tr>
+    </thead>
+    <tbody>
+        <% if(hasil && hasil.length > 0) { %>
+            <% hasil.forEach((item, index) => { %>
+                <tr>
+                    <td class="text-center fw-bold"><%= index + 1 %></td>
+                    <td><%= item.nama %></td>
+                    <td class="text-center fw-bold"><%= item.skor_akhir.toFixed(4) %></td>
+                    <td class="text-center align-middle">
+                        <button class="btn btn-sm btn-success fw-bold shadow-sm" data-bs-toggle="modal" data-bs-target="#modalPilih<%= item.id_alternatif %>">
+                            <i class="bi bi-check-circle me-1"></i> Pilih
+                        </button>
+                    </td>
+                </tr>
+
+                <%# ========================================================================= %>
+                <%# 3. POP-UP MODAL (FORM KEPUTUSAN) %>
+                <%# Menampilkan pesan konfirmasi pilihan %>
+                <%# ========================================================================= %>
+                <div class="modal fade" id="modalPilih<%= item.id_alternatif %>" tabindex="-1" aria-labelledby="modalLabel<%= item.id_alternatif %>" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content text-center">
+                            <div class="modal-header bg-success text-white border-0">
+                                <h5 class="modal-title w-100" id="modalLabel<%= item.id_alternatif %>">Keputusan Ditetapkan</h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body py-4">
+                                <i class="bi bi-info-circle-fill text-success mb-3" style="font-size: 3rem;"></i>
+                                <h5 class="fw-bold">Rekomendasi Terpilih!</h5>
+                                <p class="text-muted mt-2 mb-0">
+                                    Anda telah memilih alternatif <br>
+                                    <b class="fs-5 text-dark"><%= item.nama %></b> <br>
+                                    sebagai keputusan akhir pada sistem SPK ini.
+                                </p>
+                            </div>
+                            <div class="modal-footer justify-content-center border-0 pb-4">
+                                <button type="button" class="btn btn-success px-5 rounded-pill" data-bs-dismiss="modal">Oke</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+        <% } else { %>
+            <%# ========================================================================= %>
+            <%# 4. TAMPILAN JIKA DATA KOSONG %>
+            <%# ========================================================================= %>
+            <tr>
+                <td colspan="4" class="text-center p-4">Data belum memadai untuk dihitung. Silakan isi data alternatif, kriteria, dan matriks penilaian.</td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
