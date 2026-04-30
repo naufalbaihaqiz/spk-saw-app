@@ -93,7 +93,7 @@ app.use('/hasil', cekLogin, hasilRoutes);           // Semua URL yang diawali /h
 // 7. SINKRONISASI DATABASE & JALANKAN SERVER
 // Mengecek database MySQL, memperbarui tabel jika ada perubahan, lalu menyalakan server.
 // =========================================================================
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
 
 // db.sequelize.sync({ alter: true }) akan otomatis menambah/mengubah kolom 
 // di database MySQL agar sama persis dengan definisi di folder /models
@@ -109,4 +109,3 @@ db.sequelize.sync({ alter: true }).then(() => {
   console.error("❌ Gagal sinkronisasi database:", err);
 });
 
-module.exports = app;
