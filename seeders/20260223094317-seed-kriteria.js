@@ -2,7 +2,7 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.bulkInsert('kriteria', [
+    await queryInterface.bulkInsert('Kriteria', [
       {
         nama: 'Kepadatan',
         bobot: 0.30,
@@ -42,6 +42,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete('Kriterias', null, {});
+    await queryInterface.bulkDelete('Kriteria', null, {});
   }
 };
