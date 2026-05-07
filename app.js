@@ -22,7 +22,13 @@ const cekLogin = require('./middlewares/authMiddleware');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+const pgSession = require('connect-pg-simple')(session);
+
 app.use(session({
+  store: new pgSession({
+    conString: process.env.DATABASE_URL,
+    tableName: 'session'
+  }),
   secret: process.env.SESSION_SECRET || 'rahasia-spk-saw',
   resave: false,
   saveUninitialized: false,
