@@ -1,5 +1,8 @@
 'use strict';
 
+// Paksa load pg agar tersedia untuk Sequelize di Vercel
+require('pg');
+
 const fs = require('fs');
 const path = require('path');
 const Sequelize = require('sequelize');
