@@ -21,7 +21,7 @@ const cekLogin = require('./middlewares/authMiddleware');
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
+app.set('trust proxy', 1);
 const pgSession = require('connect-pg-simple')(session);
 
 app.use(session({
