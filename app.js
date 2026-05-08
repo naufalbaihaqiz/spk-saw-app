@@ -26,8 +26,9 @@ const pgSession = require('connect-pg-simple')(session);
 
 app.use(session({
   store: new pgSession({
-    conString: process.env.DATABASE_URL_DIRECT || process.env.DATABASE_URL,
-    tableName: 'session'
+    conString: process.env.DATABASE_URL,
+    tableName: 'session',
+    ssl: { rejectUnauthorized: false }
   }),
   secret: process.env.SESSION_SECRET || 'rahasia-spk-saw',
   resave: false,
