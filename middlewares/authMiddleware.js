@@ -1,7 +1,13 @@
+const jwt = require('jsonwebtoken');
+const SECRET = process.env.SESSION_SECRET || 'rahasia-spk-saw';
+
 const cekLogin = (req, res, next) => {
-  if (req.session && req.session.userId) {
+  const token = req.cookies.token;
+  if (!token) return res.redirect('/login');
+  try {
+    req.user = jwt.verify(token, SECRET);
     next();
-  } else {
+  } catch {
     res.redirect('/login');
   }
 };
